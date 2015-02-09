@@ -4,5 +4,7 @@ var TestObject = {
 };
 
 describe("A mocha test", function() {
-    it("should have a global namespace");
+    it("should have a global namespace", function(){
+        chai.assert.equal(1,1);
+    });
 });
