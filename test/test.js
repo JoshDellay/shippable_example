@@ -4,15 +4,5 @@ var TestObject = {
 };
 
 describe("A mocha test", function() {
-    before(function() {
-        casper.start(url);
-    });
-    it("should have a global namespace", function() {
-        casper.then(function () {
-            var evalResult = casper.evaluate(function() {
-                return true;
-            });
-            evalResult.should.equal(true);
-        });
-    });
+    it("should have a global namespace");
 });
