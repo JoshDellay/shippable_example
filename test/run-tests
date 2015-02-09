@@ -34,7 +34,7 @@ then
 fi
 
 # run our mocha-casperjs and output test file
-mocha-casperjs --reporter=xunit > ../shippable/testresults/xunit.xml
+mocha --reporter=xunit > ../shippable/testresults/xunit.xml
 
 # cache the exit code of the test runner
 result=$?
