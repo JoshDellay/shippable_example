@@ -45,7 +45,7 @@ fi
 echo "Running mocha-casperjs tests"
 
 # run our mocha-casperjs and output test file
-mocha --reporter=xunit > ../shippable/testresults/xunit.xml
+mocha-casperjs --reporter=xunit > ../shippable/testresults/xunit.xml
 
 echo "After tests"
 
