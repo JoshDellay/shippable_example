@@ -14,27 +14,18 @@ export MONGO_URL="mongodb://127.0.0.1:27017/${PWD##*/}"
 export NODE_ENV="development"
 export METEOR_ENV="${NODE_ENV}"
 
-echo "Before db drop"
-
 # drop the mongo database so the test run fresh
 mongo --eval "db.dropDatabase()" > /dev/null
 
-echo "Before nohup"
-
 # run meteor in the background
 nohup meteor run --settings settings.test.json > .nohup.out 2>&1&
-
-echo "Before while"
 
 # wait for meteor to start
 while [ 1 ]; do
     wget --quiet --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 --continue ${ROOT_URL} -O /dev/null
     if [ $? = 0 ]; then break; fi; # check return value, break if successful (0)
-    echo $?
     sleep 2s;
 done;
-
-echo "Before if loop"
 
 if [ $? -ne 0 ]
 then
@@ -42,22 +33,14 @@ then
   exit 1
 fi
 
-echo "Running mocha-casperjs tests"
-
 # run our mocha-casperjs and output test file
 mocha-casperjs --reporter=xunit > ../shippable/testresults/xunit.xml
-
-echo "After tests"
 
 # cache the exit code of the test runner
 result=$?
 
-echo "After result"
-
 # stop meteor
 ps -ef | grep meteor | grep -v grep | awk '{print $2}' | xargs kill -9
-
-echo "After stop meteor"
 
 # return the test runner exit code
 exit ${result}
