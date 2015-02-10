@@ -21,4 +21,4 @@ notifications:
     recipients:
       - josh.dellay@gmail.com
     on_success: change
-    on_failure: alwayss
+    on_failure: always
